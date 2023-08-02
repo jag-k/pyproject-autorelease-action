@@ -1,0 +1,22 @@
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Autorelease
+        uses: ./ # Uses an action in the root directory
+        id: release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Release result
+        run: |
+          echo "${{ steps.release.outputs.release_result }}"

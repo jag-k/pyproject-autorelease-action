@@ -1,0 +1,45 @@
+name: 'pyproject autorelease'
+
+branding:
+  color: 'purple'
+  icon: 'git-branch'
+
+description: 'Auto release the python project based on changes version in pyproject.toml'
+
+inputs:
+  body:
+    description: 'The body of the release'
+  body_prefix:
+    description: 'The prefix of the body of the release'
+  body_suffix:
+    description: 'The suffix of the body of the release'
+  release_name:
+    description: 'The name of the release'
+  release_changes:
+    description: 'The changes of the release'
+  project_path:
+    description: 'The path of the project (default: `$GITHUB_WORKSPACE`)'
+  pyproject_path:
+    description: 'The path of the pyproject.toml (default: `project_path/pyproject.toml`)'
+  changelog_path:
+    description: 'The path of the CHANGELOG.md (default: `project_path/CHANGELOG.md`)'
+  error_no_changelog:
+    description: "Error if CHANGELOG.md doesn't exist (default: `false`)"
+  error_on_release_exist:
+    description: 'Error if release version exist (default: `false`)'
+  is_draft:
+    description: 'Is draft (default: `false`)'
+  is_prerelease:
+    description: 'Is prerelease (default: `false`)'
+
+outputs:
+  release_result:
+    description: 'The result of the release'
+  release_exist:
+    description: 'Is the release exist (`true` or `false`)'
+  version:
+    description: 'The version of the release'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
